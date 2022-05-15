@@ -17,3 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//cars
+Route::apiResources([
+    'cars' => App\Http\Controllers\Api\CarController::class
+]);
+
+//carusers
+Route::apiResources([
+    'carusers' => App\Http\Controllers\Api\CarUserController::class
+]);
+
