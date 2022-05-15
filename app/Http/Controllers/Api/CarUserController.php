@@ -3,16 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CarUserStoreRequest;
 use App\Http\Resources\CarUserResource;
 use App\Models\CarUser;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CarUserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -22,35 +24,37 @@ class CarUserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return CarUserResource
      */
-    public function store(Request $request)
+    public function store(CarUserStoreRequest $request)
     {
-        //
+        dd($request);
+        $carUser = CarUser::create($request->validated());
+        return new CarUserResource($carUser);
     }
 
     /**
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return CarUserResource
      */
     public function show($id)
     {
-        //
+        return new CarUserResource(CarUser::findOrFail($id));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return CarUserResource
      */
-    public function update(Request $request, $id)
+    public function update(CarUserStoreRequest $request, $id)
     {
-        //
+        $carUser = CarUser::find($id);
+        $carUser->update($request->validated());
+        return new CarUserResource($carUser);
     }
 
     /**
@@ -61,6 +65,8 @@ class CarUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $carUser = CarUser::find($id);
+        $carUser->delete();
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }
