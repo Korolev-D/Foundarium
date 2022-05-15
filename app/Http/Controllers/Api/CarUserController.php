@@ -28,7 +28,6 @@ class CarUserController extends Controller
      */
     public function store(CarUserStoreRequest $request)
     {
-        dd($request);
         $carUser = CarUser::create($request->validated());
         return new CarUserResource($carUser);
     }

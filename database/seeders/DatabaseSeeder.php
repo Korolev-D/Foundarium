@@ -41,10 +41,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        foreach ($this->models as $model) {
-//            Car::firstOrCreate(['model' => $model]);
-//            unset($this->models[$model]);
-//        }
+        foreach ($this->models as $model) {
+            Car::firstOrCreate(['model' => $model]);
+            unset($this->models[$model]);
+        }
 
         CarUser::factory(22)->create();
     }
