@@ -2,11 +2,37 @@
 
 namespace Database\Seeders;
 
+use App\Models\Car;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    protected $models = array(
+        0  => 'Aspark',
+        1  => 'Daihatsu',
+        2  => 'Datsun',
+        3  => 'Dome',
+        4  => 'Englon',
+        5  => 'Lexus',
+        6  => 'Honda',
+        7  => 'Acura',
+        8  => 'Isuzu',
+        9  => 'Mazda',
+        10 => 'Mini',
+        11 => 'Mitsubishi',
+        12 => 'Mitsuoka',
+        13 => 'Nissan',
+        14 => 'Infiniti',
+        15 => 'Proton',
+        16 => 'Renault',
+        17 => 'SEAT',
+        18 => 'Subaru',
+        19 => 'Suzuki',
+        20 => 'Toyota',
+        21 => 'Yamaha Motor',
+    );
     /**
      * Seed the application's database.
      *
@@ -14,11 +40,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+//        foreach ($this->models as $model) {
+//            Car::firstOrCreate(['model' => $model]);
+//            unset($this->models[$model]);
+//        }
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::factory(22)->create();
     }
 }
