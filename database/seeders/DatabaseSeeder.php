@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Car;
+use App\Models\CarUser;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -45,6 +46,6 @@ class DatabaseSeeder extends Seeder
 //            unset($this->models[$model]);
 //        }
 
-        User::factory(22)->create();
+        CarUser::factory(22)->create();
     }
 }

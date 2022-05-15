@@ -17,7 +17,8 @@ class CarUserFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>$this->faker->unique()->name
+            'name'   => $this->faker->unique()->name,
+            'car_id' => $this->faker->unique()->numberBetween(1, 22)
         ];
     }
 }
