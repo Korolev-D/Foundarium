@@ -24,8 +24,9 @@ class CarUserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'car_id' => 'required|integer|exists:cars,id',
-            'name'   => 'required|string|unique:car_users'
+            'car_id'   => 'required|integer|exists:cars,id',
+            'car_id.*' => 'unique:cars,id',
+            'name'     => 'required|string|unique:car_users'
         ];
     }
 }

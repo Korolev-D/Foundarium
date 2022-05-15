@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CarStoreRequest;
 use App\Http\Resources\CarResource;
 use App\Models\Car;
-use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CarController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -22,23 +23,23 @@ class CarController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return CarResource
      */
-    public function store(Request $request)
+    public function store(CarStoreRequest $request)
     {
-        //
+        $car = Car::create($request->validated());
+        return new CarResource($car);
     }
 
     /**
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return CarResource
      */
     public function show($id)
     {
-        //
+        return new CarResource(Car::findOrFail($id));
     }
 
     /**
@@ -46,11 +47,13 @@ class CarController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return CarResource
      */
-    public function update(Request $request, $id)
+    public function update(CarStoreRequest $request, $id)
     {
-        //
+        $car = Car::find($id);
+        $car->update($request->validated());
+        return new CarResource($car);
     }
 
     /**
@@ -61,6 +64,8 @@ class CarController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $car = Car::find($id);
+        $car->delete();
+        return response('null', Response::HTTP_NO_CONTENT);
     }
 }
